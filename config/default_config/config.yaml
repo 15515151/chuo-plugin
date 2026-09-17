@@ -1,0 +1,19 @@
+# 系统设置
+summary: "窝爱泥"
+
+# 戳一戳配置
+chuo: true
+
+probabilities_text: 0.6
+probabilities_img: 0.1
+probabilities_voice: 0
+probabilities_mute: 0.05
+probabilities_video: 0.15
+
+settings_master: 主人
+settings_mutetime: 1
+settings_speakerapi: 纳西妲
+settings_emoji_api: https://api.lolimi.cn/API/chaiq/c.php
+settings_video_api: https://api.yujn.cn/api/nvda.php?type=video
+settings_tts_api: http://1.14.51.4:19191/tts
+settings_redis_prefix: "Yz:pokecount:"
