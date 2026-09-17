@@ -10,9 +10,8 @@ probabilities_voice: 0
 probabilities_mute: 0.05
 probabilities_video: 0.15
 
-settings_master: 主人
 settings_mutetime: 1
 settings_emoji_api: https://api.lolimi.cn/API/chaiq/c.php
-settings_video_api: https://api.yujn.cn/api/nvda.php?type=video
+settings_video_api: https://random.qqun.top:442/api/v1/anime-clips/random
 settings_tts_api: https://api.all.qqun.top:442/frxxz
 settings_redis_prefix: "Yz:pokecount:"

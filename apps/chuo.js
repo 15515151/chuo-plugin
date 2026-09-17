@@ -1,5 +1,4 @@
 import { segment } from 'oicq';
-import cfg from '../../../lib/config/config.js';
 import common from '../../../lib/common/common.js';
 import moment from "moment";
 import _ from 'lodash';
@@ -17,7 +16,6 @@ export class chuo extends plugin {
 
         // 加载配置
         this.config = Cfg.getConfig('config');
-        this.protectMasterEnabled = this.config.protectMaster !== false;
         this.chuoCfg = Cfg.getConfig('chuo');
 
         // 初始化配置
@@ -39,10 +37,9 @@ export class chuo extends plugin {
 
         // 设置配置
         this.settings = {
-            master: this.config.settings_master || "主人",
             mutetime: Number(this.config.settings_mutetime) || 1,
             emoji_api: this.config.settings_emoji_api || "https://api.lolimi.cn/API/chaiq/c.php",
-            video_api: this.config.settings_video_api || "https://api.yujn.cn/api/nvda.php?type=video",
+            video_api: this.config.settings_video_api || "https://random.qqun.top:442/api/v1/anime-clips/random",
             voice_api: this.config.settings_tts_api || "https://api.all.qqun.top:442/frxxz",
             redis_prefix: this.config.settings_redis_prefix || "Yz:pokecount:"
         };
@@ -114,12 +111,6 @@ export class chuo extends plugin {
             }
         };
 
-        // 主人保护逻辑
-        if (this.protectMasterEnabled && cfg.masterQQ.includes(e.target_id)) {
-            await this.handleMasterPoke(e);
-            return true;
-        }
-
         if (e.target_id === e.self_id) {
             const count = await this.getCount(this.settings.redis_prefix, e.group_id);
             const usercount = this.settings.mutetime === 0 ? 
@@ -153,22 +144,7 @@ export class chuo extends plugin {
         }
     }
 
-    async handleMasterPoke(e) {
-        if (cfg.masterQQ.includes(e.operator_id)) return;
-        
-        e.reply([
-            segment.at(e.operator_id),
-            `\n你几把谁啊, 竟敢戳我亲爱滴${this.settings.master}, 胆子好大啊你`,
-            segment.image(this.settings.emoji_api)
-        ], true);
-        
-        await common.sleep(1000);
-        // 修复：使用正确的API调用方式
-        await this.sendPoke(e.bot, e.group_id, e.operator_id);
-        await e.group.muteMember(e.operator_id, 60);
-    }
-
-    // 新增：发送戳一戳的通用方法
+    // 发送戳一戳的通用方法
     async sendPoke(bot, group_id, user_id) {
         try {
             // 方法1：使用 group_poke API（推荐）

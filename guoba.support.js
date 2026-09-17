@@ -134,11 +134,6 @@ export function supportGuoba() {
           }
         },
         {
-          field: 'settings_master',
-          label: '主人称呼',
-          component: 'Input'
-        },
-        {
           field: 'settings_mutetime',
           label: '禁言时长(分钟)',
           component: 'InputNumber'
@@ -162,16 +157,6 @@ export function supportGuoba() {
           field: 'settings_redis_prefix',
           label: 'Redis前缀',
           component: 'Input'
-        },
-        {
-          field: 'protectMaster',
-          label: '主人保护',
-          helpMessage: '开启后他人戳主人会被反击并禁言',
-          component: 'Switch',
-          componentProps: {
-            activeText: '启用',
-            inactiveText: '禁用'
-          }
         }
       ],
       getConfigData() {
