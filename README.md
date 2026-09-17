@@ -11,7 +11,7 @@
     git clone https://github.com/15515151/chuo-plugin.git ./plugins/chuo-plugin
 
 > [!NOTE]
-> 目录名必须为 `chuo-plugin`，否则插件读不到配置
+> 插件按自身所在目录读取配置，目录名可自定义
 
 #### 2. 安装依赖 二选一
 
@@ -33,8 +33,3 @@ cd plugins/chuo-plugin && pnpm i
 - 各项概率、禁言时长、各类 API 地址在 `config/config.yaml` 中修改，也可在锅巴面板中配置
 - `config/` 目录不纳入版本管理，首次启动时会自动从 `config/default_config/` 生成
 
-<div align="left"> 
-  
-![Visitor Count](https://profile-counter.glitch.me/15515151/count.svg)
-  
-</div>
