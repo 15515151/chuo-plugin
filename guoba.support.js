@@ -144,11 +144,6 @@ export function supportGuoba() {
           component: 'InputNumber'
         },
         {
-          field: 'settings_speakerapi',
-          label: '语音合成API',
-          component: 'Input'
-        },
-        {
           field: 'settings_emoji_api',
           label: '表情API地址',
           component: 'Input'
@@ -160,7 +155,7 @@ export function supportGuoba() {
         },
         {
           field: 'settings_tts_api',
-          label: '语音合成API地址',
+          label: '语音API地址',
           component: 'Input'
         },
         {

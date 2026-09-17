@@ -12,8 +12,7 @@ probabilities_video: 0.15
 
 settings_master: 主人
 settings_mutetime: 1
-settings_speakerapi: 纳西妲
 settings_emoji_api: https://api.lolimi.cn/API/chaiq/c.php
 settings_video_api: https://api.yujn.cn/api/nvda.php?type=video
-settings_tts_api: http://1.14.51.4:19191/tts
+settings_tts_api: https://api.all.qqun.top:442/frxxz
 settings_redis_prefix: "Yz:pokecount:"

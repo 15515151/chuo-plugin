@@ -41,10 +41,9 @@ export class chuo extends plugin {
         this.settings = {
             master: this.config.settings_master || "主人",
             mutetime: Number(this.config.settings_mutetime) || 1,
-            speakerapi: this.config.settings_speakerapi || "纳西妲",
             emoji_api: this.config.settings_emoji_api || "https://api.lolimi.cn/API/chaiq/c.php",
             video_api: this.config.settings_video_api || "https://api.yujn.cn/api/nvda.php?type=video",
-            tts_api: this.config.settings_tts_api || "http://1.14.51.4:19191/tts",
+            voice_api: this.config.settings_tts_api || "https://api.all.qqun.top:442/frxxz",
             redis_prefix: this.config.settings_redis_prefix || "Yz:pokecount:"
         };
 
@@ -69,26 +68,25 @@ export class chuo extends plugin {
                 e.reply(segment.image(this.settings.emoji_api));
             },
             voice: () => {
-    logger.info('[回复随机语音生效]');
-    // 直接调用随机语音API，不需要文本转语音
-    fetch(this.settings.tts_api)
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.url) {
-                // 直接发送语音文件URL
-                e.reply(segment.record(data.url));
-            } else {
-                logger.error('语音API返回数据格式错误');
-                // 如果API调用失败，回退到文字回复
-                replyActions.text();
-            }
-        })
-        .catch(error => {
-            logger.error(`调用语音API失败: ${error.message}`);
-            // 失败时回退到文字回复
-            replyActions.text();
-        });
-},
+                logger.info('[回复随机语音生效]');
+                // 直接取语音API返回的音频地址发送，不做任何文本合成
+                fetch(this.settings.voice_api)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data?.url) {
+                            e.reply(segment.record(data.url));
+                        } else {
+                            logger.error('语音API返回数据格式错误:', JSON.stringify(data));
+                            // 如果API调用失败，回退到文字回复
+                            replyActions.text();
+                        }
+                    })
+                    .catch(error => {
+                        logger.error(`调用语音API失败: ${error.message}`);
+                        // 失败时回退到文字回复
+                        replyActions.text();
+                    });
+            },
             video: () => {
                 logger.info('[回复随机视频生效]');
                 e.reply('戳累了，看会视频吧！');
